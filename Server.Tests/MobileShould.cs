@@ -12,23 +12,15 @@ namespace Server.Tests
 		public void HaveInitialState()
 		{
 			var sut = new Mobile();
-
-			Assert.Null(sut.Account);
-
-			Assert.IsType<List<AggressorInfo>>(sut.Aggressed);
-			Assert.Empty(sut.Aggressed);
-
-			Assert.IsType<List<AggressorInfo>>(sut.Aggressors);
-			Assert.Empty(sut.Aggressors);
-
-			Assert.True(sut.Alive);
-
-			Assert.Equal(default, sut.BAC);
-
-			Assert.Null(sut.Backpack);
-
-			// get() calls BankBox constructor which has more dependencies which cannot be resolved at the moment.
-			// Assert.Null(sut.BankBox);
+			
+			// Description
+			Assert.Null(sut.Name);
+			Assert.Null(sut.NameMod);
+			Assert.Null(sut.RawName);
+			
+			Assert.Null(sut.Title);
+			Assert.Null(sut.TitleName);
+			
 
 			// Resistances
 			Assert.Equal(0, sut.BaseColdResistance);
@@ -47,27 +39,9 @@ namespace Server.Tests
 			
 			Assert.Equal(0, sut.MagicDamageAbsorb);
 			Assert.Equal(0, sut.MeleeDamageAbsorb);
-
-			Assert.Equal(0, sut.BaseSoundID);
-
-			Assert.False(sut.Blessed);
-
-			// Hues
-			Assert.Equal(-1, sut.HueMod);
 			
-			Assert.Equal(0x2106, sut.HuedItemID);
-
-			Assert.Equal(0, sut.DefaultBloodHue);
-
-			Assert.Equal(0, sut.Hue);
-			Assert.Equal(0, sut.BloodHue);
-			Assert.Equal(0, sut.EmoteHue);
-			Assert.Equal(0, sut.FaceHue);
-			Assert.Equal(0, sut.FacialHairHue);
-			Assert.Equal(0,sut.WhisperHue);
-			Assert.Equal(0,sut.YellHue);
-
-			Assert.Equal(-1, sut.NameHue);
+			Assert.Equal(new[] {0, 0, 0, 0, 0 }, sut.Resistances);
+			
 
 			// Body
 			Assert.IsType<Body>(sut.Body);
@@ -75,12 +49,8 @@ namespace Server.Tests
 			Assert.IsType<Body>(sut.BodyMod);
 			Assert.Equal(0, sut.BodyValue);
 
-			// Equipment
-			Assert.Null(sut.Bracelet);
-			Assert.Null(sut.Ring);
-			Assert.Null(sut.Talisman);
 
-			// Statuses
+			// Abilities
 			Assert.False(sut.CanSwim);
 			Assert.False(sut.CantWalk);
 			Assert.True(sut.CanTarget);
@@ -89,12 +59,7 @@ namespace Server.Tests
 			Assert.False(sut.CanRegenHits);
 			Assert.False(sut.CanRegenMana);
 			Assert.False(sut.CanRegenStam);
-
-			Assert.IsType<List<DamageEntry>>(sut.DamageEntries);
-			Assert.Empty(sut.DamageEntries);
-			Assert.Equal(0, sut.Deaths);
-
-			Assert.False(sut.Deleted);
+			
 
 			// Stats
 			Assert.Equal(1, sut.Str);
@@ -102,6 +67,8 @@ namespace Server.Tests
 			Assert.Equal(1, sut.Int);
 			
 			Assert.Equal(0, sut.Luck);
+			Assert.Equal(0, sut.Fame);
+			Assert.Equal(0, sut.Karma);
 			
 			Assert.Equal(0, sut.RawStr);
 			Assert.Equal(0, sut.RawDex);
@@ -126,14 +93,108 @@ namespace Server.Tests
 			Assert.Equal(DateTime.MinValue, sut.LastIntGain);
 			
 			Assert.Equal(DateTime.MinValue, sut.LastStatGain);
-			
-			// Mana
+			Assert.Equal(0, sut.Hits);
+			Assert.Equal(50, sut.HitsMax);
+
+			Assert.Equal(0, sut.TithingPoints);
 			Assert.Equal(0, sut.Mana);
 			Assert.Equal(1, sut.ManaMax);
 
+			Assert.Equal(0, sut.Hunger);
+			Assert.Equal(0, sut.Thirst);
+			
+			Assert.Equal(0, sut.VirtualArmor);
+			Assert.Equal(0, sut.ArmorRating);
+			
+			Assert.Equal(0, sut.RacialSkillBonus);
+
+			Assert.IsType<List<DamageEntry>>(sut.DamageEntries);
+			Assert.Empty(sut.DamageEntries);
+
+			Assert.Equal(0, sut.Kills);
+			Assert.Equal(0, sut.Deaths);
+			
+			Assert.IsType<VirtueInfo>(sut.Virtues);
+
+			// Equipment
+			Assert.Null(sut.ArmsArmor);
+			Assert.Null(sut.ChestArmor);
+			Assert.Null(sut.HandArmor);
+			Assert.Null(sut.HeadArmor);
+			Assert.Null(sut.LegsArmor);
+			Assert.Null(sut.NeckArmor);
+			
+			Assert.Null(sut.Bracelet);
+			Assert.Null(sut.Ring);
+			Assert.Null(sut.Talisman);
+			
+			Assert.Null(sut.Backpack);
+			// get() calls BankBox constructor which has more dependencies which cannot be resolved at the moment.
+			// Assert.Null(sut.BankBox);
+			Assert.Null(sut.Holding);
+			
+			Assert.IsType<List<Item>>(sut.Items);
+			
+			Assert.Equal(0,sut.TotalGold);
+			Assert.Equal(0,sut.TotalItems);
+			
+			Assert.Equal(0, sut.TotalWeight);
+			Assert.Equal(Int32.MaxValue, sut.MaxWeight);
+			
+			Assert.Null(sut.Mount);
+
+			
+			// Characteristics
+			Assert.False(sut.Player);
+			Assert.Null(sut.Race);
+			Assert.False(sut.Female);
+
+			Assert.True(sut.Alive);
+			Assert.False(sut.Blessed);
+			Assert.False(sut.Deleted);
+			Assert.False(sut.Flying);
+			Assert.False(sut.Frozen);
+			Assert.False(sut.GuardImmune);
+			Assert.False(sut.Hidden);
+			Assert.False(sut.IgnoreMobiles);
+			Assert.False(sut.IsBodyMod);
+			Assert.False(sut.IsDeadBondedPet);
+			Assert.False(sut.IsStealthing);
+			Assert.False(sut.KeepsItemsOnDeath);
+			Assert.False(sut.Meditating);
+			Assert.False(sut.Mounted);
+			Assert.False(sut.Murderer);
+			Assert.False(sut.Paralyzed);
+			Assert.False(sut.Poisoned);
+			Assert.False(sut.Pushing);
+			Assert.True(sut.RegenThroughPoison);
+			Assert.True(sut.RetainPackLocsOnDeath);
+			Assert.False(sut.Warmode);
+
+			Assert.True(sut.HasBlood);
+			Assert.False(sut.HasTrade);
+
+			Assert.Null(sut.Poison);
+			Assert.Null(sut.PoisonTimer);
+
+
+			// Location
+			Assert.IsType<Region>(sut.Region);
+			
+			Assert.Null(sut.WalkRegion);
+			Assert.IsType<Point3D>(sut.Location);
+			
+			Assert.Equal(0, sut.X);
+			Assert.Equal(0, sut.Y);
+			Assert.Equal(0, sut.Z);
+
+			Assert.IsType<Map>(sut.Map);
+			
 			Assert.IsType<Direction>(sut.Direction);
 
-			Assert.IsType<DFAlgorithm>(sut.DFA);
+			Assert.Null(sut.LogoutMap);
+			Assert.IsType<Point3D>(sut.LogoutLocation);
+
 
 			// Guild
 			Assert.False(sut.DisplayGuildAbbr);
@@ -141,17 +202,9 @@ namespace Server.Tests
 			Assert.Null(sut.Guild);
 			Assert.Null(sut.GuildFealty);
 			Assert.Null(sut.GuildTitle);
+			
+			Assert.Null(sut.Weapon);
 
-			Assert.Equal(0, sut.Fame);
-
-			Assert.False(sut.Female);
-
-			// Effects
-			Assert.False(sut.Flying);
-			Assert.False(sut.Frozen);
-			Assert.False(sut.Hidden);
-			Assert.False(sut.Paralyzed);
-			Assert.False(sut.Poisoned);
 
 			// Followers
 			Assert.Equal(0, sut.Followers);
@@ -161,91 +214,22 @@ namespace Server.Tests
 			
 			Assert.Equal(0, sut.HairItemID);
 			Assert.Equal(0, sut.FacialHairItemID);
-
-			Assert.Equal(0, sut.Fame);
-			Assert.Equal(0, sut.Karma);
-
-			Assert.False(sut.GuardImmune);
-
-			// Hit points
-			Assert.Equal(0, sut.Hits);
-			Assert.Equal(50, sut.HitsMax);
-
-			Assert.Equal(0, sut.TithingPoints);
-
-			Assert.Null(sut.Holding);
-
-			Assert.Equal(0, sut.Hunger);
-			Assert.Equal(0, sut.Thirst);
-
-			// Armor rating
-			Assert.Equal(0, sut.VirtualArmor);
-			Assert.Equal(0, sut.ArmorRating);
 			
-			Assert.Equal(0, sut.RacialSkillBonus);
-
-			// Equipped Armor
-			Assert.Null(sut.ArmsArmor);
-			Assert.Null(sut.ChestArmor);
-			Assert.Null(sut.HandArmor);
-			Assert.Null(sut.HeadArmor);
-			Assert.Null(sut.LegsArmor);
-			Assert.Null(sut.NeckArmor);
-
-			Assert.True(sut.HasBlood);
-			Assert.False(sut.HasTrade);
-			
-			Assert.IsType<List<Item>>(sut.Items);
-			Assert.Empty(sut.DamageEntries);
-			
-			Assert.Equal(0,sut.TotalGold);
-			Assert.Equal(0,sut.TotalItems);
-			
-			Assert.False(sut.IgnoreMobiles);
-			Assert.False(sut.IsStealthing);
-			Assert.False(sut.IsBodyMod);
-			Assert.False(sut.IsDeadBondedPet);
-
-			Assert.Equal(0, sut.Kills);
-			Assert.False(sut.KeepsItemsOnDeath);
-			
-			Assert.Null(sut.Language);
-			
-			Assert.IsType<Point3D>(sut.Location);
-			
-			Assert.Equal(DateTime.MinValue, sut.LastKilled);
-			
+			// Statistics
 			Assert.Null(sut.LastKiller);
-			
-			Assert.Equal(0, sut.LightLevel);
-			
-			Assert.IsType<Point3D>(sut.LogoutLocation);
-			Assert.Null(sut.LogoutMap);
-
+			Assert.Equal(DateTime.MinValue, sut.LastKilled);
 			Assert.Equal(0, sut.LastMoveTime);
 
-			Assert.IsType<Map>(sut.Map);
-			
-			Assert.False(sut.Meditating);
-			
-			Assert.Null(sut.Mount);
-			
-			Assert.False(sut.Mounted);
-			
-			Assert.False(sut.Murderer);
-			
-			Assert.Equal(0, sut.TotalWeight);
-			Assert.Equal(Int32.MaxValue, sut.MaxWeight);
-			
-			// Naming
-			Assert.Null(sut.Name);
-			Assert.Null(sut.NameMod);
-			Assert.Null(sut.RawName);
-			
-			Assert.Null(sut.Title);
-			Assert.Null(sut.TitleName);
-			
-			Assert.Null(sut.NetState);
+
+			// Interaction
+			Assert.Null(sut.Target);
+			Assert.False(sut.TargetLocked);
+
+			Assert.IsType<List<AggressorInfo>>(sut.Aggressed);
+			Assert.Empty(sut.Aggressed);
+
+			Assert.IsType<List<AggressorInfo>>(sut.Aggressors);
+			Assert.Empty(sut.Aggressors);
 			
 			Assert.Equal(0, sut.NextActionMessage);
 			Assert.Equal(0, sut.NextActionTime);
@@ -254,6 +238,40 @@ namespace Server.Tests
 			Assert.Equal(0, sut.NextCombatTime);
 			Assert.NotNull(sut.NextSkillTime);
 			Assert.Equal(0, sut.NextSpellTime);
+
+			// Hues
+			Assert.Equal(-1, sut.HueMod);
+			
+			Assert.Equal(0x2106, sut.HuedItemID);
+
+			Assert.Equal(0, sut.DefaultBloodHue);
+
+			Assert.Equal(0, sut.Hue);
+			Assert.Equal(0, sut.BloodHue);
+			Assert.Equal(0, sut.EmoteHue);
+			Assert.Equal(0, sut.FaceHue);
+			Assert.Equal(0, sut.FacialHairHue);
+			Assert.Equal(0,sut.WhisperHue);
+			Assert.Equal(0,sut.YellHue);
+
+			Assert.Equal(-1, sut.NameHue);
+			
+			
+			// Settings
+			Assert.Equal(0, sut.BaseSoundID);
+			Assert.False(sut.YellowHealthbar);
+			Assert.Null(sut.Language);
+			Assert.Equal(0, sut.LightLevel);
+			Assert.IsType<DFAlgorithm>(sut.DFA);
+			Assert.Null(sut.Prompt);
+			
+			
+			// Unsorted
+			Assert.Null(sut.Account);
+
+			Assert.Equal(0, sut.BAC);
+			
+			Assert.Null(sut.NetState);
 			
 			Assert.False(sut.NoMoveHS);
 			
@@ -261,17 +279,7 @@ namespace Server.Tests
 			
 			Assert.Null(sut.Party);
 			
-			Assert.False(sut.Player);
-			
-			Assert.Null(sut.Poison);
-			
 			Assert.Null(sut.Profile);
-			
-			Assert.Null(sut.Prompt);
-			
-			Assert.False(sut.Pushing);
-			
-			Assert.Null(sut.PoisonTimer);
 			
 			Assert.False(sut.ProfileLocked);
 			
@@ -280,34 +288,9 @@ namespace Server.Tests
 			Assert.False(sut.PublicHouseContent);
 			
 			Assert.Null(sut.QuestArrow);
-			
-			Assert.Null(sut.Race);
-			
-			// Location
-			Assert.IsType<Region>(sut.Region);
-			Assert.Null(sut.WalkRegion);
-			
-			Assert.Equal(0, sut.X);
-			Assert.Equal(0, sut.Y);
-			Assert.Equal(0, sut.Z);
-			
-			Assert.Equal(new[] {0, 0, 0, 0, 0 }, sut.Resistances);
-			
+
 			Assert.IsType<RemoveMobile>(sut.RemovePacket);
 			
-			Assert.True(sut.RegenThroughPoison);
-			Assert.True(sut.RetainPackLocsOnDeath);
-			
-			Assert.Null(sut.Target);
-			Assert.False(sut.TargetLocked);
-			
-			Assert.IsType<VirtueInfo>(sut.Virtues);
-			
-			Assert.False(sut.Warmode);
-			
-			Assert.Null(sut.Weapon);
-			
-			Assert.False(sut.YellowHealthbar);
 		}
 	}
 }
