@@ -64,7 +64,9 @@ namespace Server.Tests
 			Assert.Equal(0, sut.EmoteHue);
 			Assert.Equal(0, sut.FaceHue);
 			Assert.Equal(0, sut.FacialHairHue);
-			
+			Assert.Equal(0,sut.WhisperHue);
+			Assert.Equal(0,sut.YellHue);
+
 			Assert.Equal(-1, sut.NameHue);
 
 			// Body
@@ -73,9 +75,10 @@ namespace Server.Tests
 			Assert.IsType<Body>(sut.BodyMod);
 			Assert.Equal(0, sut.BodyValue);
 
-			// Accessories
+			// Equipment
 			Assert.Null(sut.Bracelet);
 			Assert.Null(sut.Ring);
+			Assert.Null(sut.Talisman);
 
 			// Statuses
 			Assert.False(sut.CanSwim);
@@ -168,10 +171,15 @@ namespace Server.Tests
 			Assert.Equal(0, sut.Hits);
 			Assert.Equal(50, sut.HitsMax);
 
+			Assert.Equal(0, sut.TithingPoints);
+
 			Assert.Null(sut.Holding);
 
 			Assert.Equal(0, sut.Hunger);
+			Assert.Equal(0, sut.Thirst);
 
+			// Armor rating
+			Assert.Equal(0, sut.VirtualArmor);
 			Assert.Equal(0, sut.ArmorRating);
 			
 			Assert.Equal(0, sut.RacialSkillBonus);
@@ -190,6 +198,9 @@ namespace Server.Tests
 			Assert.IsType<List<Item>>(sut.Items);
 			Assert.Empty(sut.DamageEntries);
 			
+			Assert.Equal(0,sut.TotalGold);
+			Assert.Equal(0,sut.TotalItems);
+			
 			Assert.False(sut.IgnoreMobiles);
 			Assert.False(sut.IsStealthing);
 			Assert.False(sut.IsBodyMod);
@@ -201,6 +212,7 @@ namespace Server.Tests
 			Assert.Null(sut.Language);
 			
 			Assert.IsType<Point3D>(sut.Location);
+			
 			Assert.Equal(DateTime.MinValue, sut.LastKilled);
 			
 			Assert.Null(sut.LastKiller);
@@ -225,9 +237,13 @@ namespace Server.Tests
 			Assert.Equal(0, sut.TotalWeight);
 			Assert.Equal(Int32.MaxValue, sut.MaxWeight);
 			
+			// Naming
 			Assert.Null(sut.Name);
 			Assert.Null(sut.NameMod);
 			Assert.Null(sut.RawName);
+			
+			Assert.Null(sut.Title);
+			Assert.Null(sut.TitleName);
 			
 			Assert.Null(sut.NetState);
 			
@@ -267,7 +283,13 @@ namespace Server.Tests
 			
 			Assert.Null(sut.Race);
 			
+			// Location
 			Assert.IsType<Region>(sut.Region);
+			Assert.Null(sut.WalkRegion);
+			
+			Assert.Equal(0, sut.X);
+			Assert.Equal(0, sut.Y);
+			Assert.Equal(0, sut.Z);
 			
 			Assert.Equal(new[] {0, 0, 0, 0, 0 }, sut.Resistances);
 			
@@ -275,6 +297,17 @@ namespace Server.Tests
 			
 			Assert.True(sut.RegenThroughPoison);
 			Assert.True(sut.RetainPackLocsOnDeath);
+			
+			Assert.Null(sut.Target);
+			Assert.False(sut.TargetLocked);
+			
+			Assert.IsType<VirtueInfo>(sut.Virtues);
+			
+			Assert.False(sut.Warmode);
+			
+			Assert.Null(sut.Weapon);
+			
+			Assert.False(sut.YellowHealthbar);
 		}
 	}
 }
