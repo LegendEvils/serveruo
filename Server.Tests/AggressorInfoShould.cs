@@ -1,4 +1,5 @@
 using System;
+using Server.Tests.Fixtures;
 using Xunit;
 
 namespace Server.Tests
@@ -56,17 +57,5 @@ namespace Server.Tests
 
 			Assert.False(sut.Reported);
 		}
-	}
-
-	// ReSharper disable once ClassNeverInstantiated.Global
-	public class LoadWorldFixture : IDisposable
-	{
-		public LoadWorldFixture()
-		{
-			Misc.MapDefinitions.Configure();
-			World.Load();
-		}
-
-		public void Dispose() { }
 	}
 }
